@@ -1,10 +1,15 @@
 package com.jg.mes.controller;
 
+import com.jg.mes.domain.Video;
+import com.jg.mes.service.VideoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,14 +21,16 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/video")
 public class VideoController {
-    @RequestMapping("list")
-    public Object list(){
-        Map<Object, Object> map = new HashMap<>();
-        map.put(1,"Hello World!");
-        return map;
+    private final VideoService videoService;
+    @Autowired
+    public VideoController(VideoService videoService) {
+        this.videoService = videoService;
     }
-    @GetMapping("list1")
-    public  Object list1(){
-        return  "Hello World!";
+
+    @GetMapping("videos")
+    public Object videos(){
+        List<Video> videos = videoService.videos();
+        return videos;
     }
+
 }

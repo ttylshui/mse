@@ -1,5 +1,9 @@
 package com.jg.mes.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,9 +12,12 @@ import java.util.Date;
  * @Description: com.jg.mes.domain
  * @version: 1.0
  */
-public class User {
+public class User implements Serializable {
+    @JsonIgnore
+   private int id;
    private String name;
    private String pwd;
+   @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",locale="zh",timezone="GMT+8")
    private Date creatDate;
 
     public User() {
@@ -19,9 +26,11 @@ public class User {
     public User(String name, String pwd) {
         this.name = name;
         this.pwd = pwd;
+        this.creatDate=new Date();
     }
 
-    public User(String name, String pwd, Date creatDate) {
+    public User(int id, String name, String pwd, Date creatDate) {
+        this.id = id;
         this.name = name;
         this.pwd = pwd;
         this.creatDate = creatDate;
@@ -54,7 +63,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", pwd='" + pwd + '\'' +
                 ", creatDate=" + creatDate +
                 '}';
