@@ -16,6 +16,11 @@ public class JsonData implements Serializable {
     public JsonData() {
     }
 
+    public  JsonData(int code,Object data){
+        this.code=code;
+        this.data=data;
+    }
+
     public JsonData(int code, Object data, String msg) {
         this.code = code;
         this.data = data;
@@ -54,4 +59,17 @@ public class JsonData implements Serializable {
                 ", msg='" + msg + '\'' +
                 '}';
     }
+
+    public static JsonData buildSuccess (Object data){
+        return new JsonData(0,data);
+    }
+
+    public static JsonData buildError (String msg){
+        return new JsonData(-1,"",msg);
+    }
+
+    public static JsonData buildError(String msg,Integer code){
+        return  new JsonData(code,"",msg);
+    }
+
 }

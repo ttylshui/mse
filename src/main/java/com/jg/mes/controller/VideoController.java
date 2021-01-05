@@ -1,5 +1,6 @@
 package com.jg.mes.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,5 +21,9 @@ public class VideoController {
         Map<Object, Object> map = new HashMap<>();
         map.put(1,"Hello World!");
         return map;
+    }
+    @GetMapping("list1")
+    public  Object list1(){
+        return  "Hello World!";
     }
 }
